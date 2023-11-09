@@ -2,6 +2,7 @@ import streamlit as st
 import pandas as pd
 import plotly_express as px
 import plotly.graph_objects as go
+import numpy as np
 
 car_data = pd.read_csv('vehicles.csv')  # lendo os dados
 
