@@ -14,7 +14,7 @@ st.header('Data Viewer')
 min_price = car_data['price'].min()
 max_price = car_data['price'].max()
 min_price, max_price = st.slider(
-    "Select the range of price you want to be showed", min_price, max_price, (min_price, max_price))
+    "Select the range of price you want to be showed", float(min_price), float(max_price), (float(min_price), float(max_price)))
 filtered = car_data[(car_data['price'] >=
                     min_price) & (car_data['price'] <= max_price)]
 st.dataframe(filtered)
