@@ -10,7 +10,13 @@ car_data[['manufacturer', 'model']
          ] = car_data['model'].str.split(' ', 1, expand=True)
 
 st.header('Data Viewer')
-st.dataframe(car_data)
+min_price = car_data['price'].min()
+max_price = car_data['price'].max()
+min_price, max_price = st.slider(
+    "Select the range of price you want to be showed", min_price, max_price, (min_price, max_price))
+filtered = car_data[(car_data['price'] >=
+                    min_price) & (car_data['price'] <= max_price)]
+st.dataframe(filtered)
 
 st.header('Vehicle Types by Manufacturer')
 
@@ -30,19 +36,6 @@ st.header('Price X Days listed colored by manufacturer')
 scatter = px.scatter(car_data, x="days_listed",
                      y="price", color='manufacturer')
 st.plotly_chart(scatter, use_container_width=True)
-
-hist_button = st.button('Criar histograma')  # criar um botão
-
-if hist_button:  # se o botão for clicado
-    # escrever uma mensagem
-    st.write(
-        'Criando um histograma para o conjunto de dados de anúncios de vendas de carros')
-
-    # criar um histograma
-    fig = px.histogram(car_data, x="odometer")
-
-    # exibir um gráfico Plotly interativo
-    st.plotly_chart(fig, use_container_width=True)
 
 st.header("Compare price distribuition between types of car")
 
