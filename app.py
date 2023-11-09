@@ -21,7 +21,12 @@ group_manufacturers.rename(columns={'date_posted': 'count'}, inplace=True)
 bar_chart = px.bar(group_manufacturers, x='manufacturer',
                    y='count', color='type', barmode='stack')
 st.plotly_chart(bar_chart, use_container_width=True)
-# fig.show()
+
+st.header('Price X Days listed colored by manufacturer')
+# Criando gráfico de dispersão
+scatter = px.scatter(car_data, x="days_listed",
+                     y="price", color='manufacturer')
+st.plotly_chart(scatter, use_container_width=True)
 
 hist_button = st.button('Criar histograma')  # criar um botão
 
